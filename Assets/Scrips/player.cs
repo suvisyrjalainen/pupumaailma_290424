@@ -11,6 +11,8 @@ public class player : MonoBehaviour
 	private float horizontalSpeed = 0f;
 
     private float mouseMovement = 0f;
+
+    public Animator animator;
 	
     // Start is called before the first frame update
     void Start()
@@ -33,5 +35,12 @@ public class player : MonoBehaviour
 		direction = transform.rotation * direction;
 
         controller.Move(direction * Time.deltaTime * 5);
+
+        if(verticalSpeed > 0){
+			animator.SetBool("Run", true);
+		}
+		else{
+			animator.SetBool("Run", false);
+		}
     }
 }
