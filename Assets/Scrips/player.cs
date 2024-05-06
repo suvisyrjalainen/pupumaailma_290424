@@ -9,6 +9,8 @@ public class player : MonoBehaviour
 
     private float verticalSpeed = 0f;
 	private float horizontalSpeed = 0f;
+
+    private float mouseMovement = 0f;
 	
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,11 @@ public class player : MonoBehaviour
 		verticalSpeed = Input.GetAxis("Vertical");
 		horizontalSpeed = Input.GetAxis("Horizontal");
 		Vector3 direction = new Vector3(horizontalSpeed, -1, verticalSpeed);
+
+        //hiirellä kääntyminen
+		mouseMovement += Input.GetAxis("Mouse X") * 5;
+		transform.localRotation = Quaternion.Euler(0, mouseMovement, 0);
+		direction = transform.rotation * direction;
 
         controller.Move(direction * Time.deltaTime * 5);
     }
